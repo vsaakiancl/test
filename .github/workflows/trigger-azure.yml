@@ -1,0 +1,17 @@
+name: Trigger Azure DevOps Pipeline
+
+on:
+  push:
+    branches:
+      - main  # Или любая другая ветка
+
+jobs:
+  trigger-pipeline:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Запуск Azure DevOps Pipeline
+        run: |
+          curl -u "user:${{ secrets.AZURE_DEVOPS_PAT }}" \
+            -X POST "https://dev.azure.com/cypresslawn/Cypresslawn/_apis/pipelines/14997/runs?api-version=7.1-preview.1" \
+            -H "Content-Type: application/json" \
+            -d '{}'
